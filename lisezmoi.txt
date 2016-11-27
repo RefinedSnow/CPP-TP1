@@ -1,9 +1,10 @@
-Compte rendu TP1
+﻿Compte rendu TP1
 *********************
 *     Exercice 1    *
 *********************
 =Traces d'éxecution : =
 ==Les échanges : ==
+...\bin>ex1.exe
 a : 9 b : 12 // affichage des nombres de base
 a : 12 b : 9 // echange par adresse / pointeur
 a : 9 b : 12 // échange par référence
@@ -73,7 +74,9 @@ ambigu et ne peut pas décider de laquelle il faut se servir.
 *********************
 *     Exercice 2    *
 *********************
-
+=Traces d'éxecution : =
+//Idem que précedemment
+...\bin>ex2.exe
 Entrer le nombre de valeurs a entrer entre 1 et 10 : 8
 Il y a 8 elements
 Element no 0 : 7
@@ -87,4 +90,40 @@ Element no 7 : 0
 7;11;1;4;5;8;9;0;
 min = 0
 max = 11
+//échange des min et max
 7;0;1;4;5;8;9;11;
+
+*********************
+*     Exercice 4    *
+*********************
+Le mot clé static permet de garder les variables en mémoire jusqu'à la fin du programme;
+C'est ce qui rend l'exercice possible.
+
+...\bin>ex4.exe
+OK
+
+*********************
+*     Exercice 5    *
+*********************
+
+...\bin>ex5.exe
+
+bonus.cpp: In function 'void MaLib::foo(double*)':
+bonus.cpp:31:22: error: invalid initialization of reference of type 'double&' fr
+om expression of type 'double*'
+   appliqueTVA(montant);
+                      ^
+bonus.cpp:13:7: note: in passing argument 1 of 'void MaLib::appliqueTVA(double&)
+'
+  void appliqueTVA(double & montant){
+       ^~~~~~~~~~~
+Il s'agit d'un problème de pointeur et de références, dans foo on aimerait appeler la fonction
+appliqueTVA (double * montant) du namespace std mais en réalité on appelle l'autre fonction
+appliqueTVA(double & montant) qui est dans le namespace MaLib.
+Poru résoudre ce problème on utilise donc le using ::appliqueTVA pour appeler la bonne fonction.
+
+...\bin>ex5.exe
+3.57604
+3.57604
+
+

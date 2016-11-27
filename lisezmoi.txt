@@ -1,0 +1,90 @@
+Compte rendu TP1
+*********************
+*     Exercice 1    *
+*********************
+=Traces d'éxecution : =
+==Les échanges : ==
+a : 9 b : 12 // affichage des nombres de base
+a : 12 b : 9 // echange par adresse / pointeur
+a : 9 b : 12 // échange par référence
+a : 9 b : 12 // échange par valeur, il est normal qu'aucun échange ne soit fait
+==Le tableau : ==
+// ensuite on entre le nopmbre d'élément que dois contenir le tableau
+Entrer le nombre de valeurs a entrer : 9
+Element no 0 : 4
+Element no 1 : 5
+Element no 2 : 1
+Element no 3 : 2
+Element no 4 : 7
+Element no 5 : 9
+Element no 6 : 8
+Element no 7 : 11
+Element no 8 : 15
+// affichage des élements dans l'ordre
+4;5;1;2;7;9;8;11;15;
+// tirage d'un élément aléatoire
+rng = 2
+// minimum et maximum
+min = 1
+max = 15
+// mélange du tableau et affichage
+2;15;11;4;1;8;9;5;7;
+
+=Explications : =
+
+En premier lieu lorsqu'on se contentait d'écrire les trois fonctions d'échange,
+sans namespace, on obtenait le message d'erreur suivant :
+
+mingw32-make: Nothing to be done for 'makefile'.
+g++ -o functions.o -c functions.cpp -W -Wall -ansi -pedantic
+g++ -o surcharge.o -c surcharge.cpp -W -Wall -ansi -pedantic
+surcharge.cpp: In function 'int main()':
+surcharge.cpp:9:19: warning: ISO C++ forbids variable length array 'tab' [-Wvla]
+
+     int tab[nbElem];
+                   ^
+surcharge.cpp:17:16: error: call of overloaded 'echange(int&, int&)' is ambiguous
+     echange(a,b);//echange par ref
+                ^
+In file included from surcharge.cpp:3:0:
+header.h:9:6: note: candidate: void echange(int&, int&)
+ void echange(int &a, int &b);
+      ^~~~~~~
+header.h:11:6: note: candidate: void echange(int, int)
+ void echange(int a, int b);
+      ^~~~~~~
+surcharge.cpp:19:16: error: call of overloaded 'echange(int&, int&)' is ambiguous
+     echange(a,b);//echange par valeur
+                ^
+In file included from surcharge.cpp:3:0:
+header.h:9:6: note: candidate: void echange(int&, int&)
+ void echange(int &a, int &b);
+      ^~~~~~~
+header.h:11:6: note: candidate: void echange(int, int)
+ void echange(int a, int b);
+      ^~~~~~~
+makefile:9: recipe for target 'surcharge.o' failed
+mingw32-make: *** [surcharge.o] Error 1
+
+Le problème ici vient de la surcharge, il a de la peine à faire la différence
+entre le passage par valeur et le passage par référence, du coup il trouve cela
+ambigu et ne peut pas décider de laquelle il faut se servir.
+
+*********************
+*     Exercice 2    *
+*********************
+
+Entrer le nombre de valeurs a entrer entre 1 et 10 : 8
+Il y a 8 elements
+Element no 0 : 7
+Element no 1 : 11
+Element no 2 : 1
+Element no 3 : 4
+Element no 4 : 5
+Element no 5 : 8
+Element no 6 : 9
+Element no 7 : 0
+7;11;1;4;5;8;9;0;
+min = 0
+max = 11
+7;0;1;4;5;8;9;11;
